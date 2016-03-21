@@ -1,0 +1,23 @@
+{
+  "name": "l1",
+  "description": "",
+  "main": "",
+  "authors": [
+    "bellcliff <bell.cliff@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.2",
+    "bootstrap": "~3.3.6"
+  }
+}

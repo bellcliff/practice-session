@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script src="libs/jquery/dist/jquery.js"></script>
+    <script src="libs/angular/angular.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="LoginCtrl as login">
+    <form ng-show="!login.user" onsubmit="return false;">
+        <label>UserName:</label>
+        <input ng-model="nu.username">
+        <label>Password:</label>
+        <input ng-model="nu.password">
+        <button ng-click="login.login(nu)">Login</button>
+        <div class="errmsg" ng-hide="!login.msg">{{login.msg}}</div>
+    </form>
+    <div ng-show="!!login.user">Welcom, {{login.user.username}},
+        <a class="btn btn-danger" ng-click="login.logout()">Logout</a>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
