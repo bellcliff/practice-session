@@ -2,12 +2,10 @@
     'use strict';
 
     angular.module('app', [])
-        .factory('login', function($http) {
-            var changes = [];
-            var change = function(data){
-                changes.forEach(function(fn){
-                    fn(data);
-                });
+        .factory('login', function($http, $rootScope) {
+            var loginInfo;
+            var change = function(data) {
+                loginInfo = data.data;
             };
             return {
                 login: function(user) {
@@ -19,28 +17,30 @@
                 isLogin: function() {
                     return $http.get('/api/login').then(change);
                 },
-                onchange: function(fn){
-                    changes.push(fn);
+                getInfo: function(){
+                    return loginInfo;
                 }
             };
         })
         .controller('MainCtrl', function($scope, login) {
+            $scope.login = login;
             login.isLogin();
             $scope.logout = function() {
                 login.logout();
             };
-            login.onchange(function(data){
-                $scope.loginInfo = data.data;
+            $scope.$watch('login.getInfo()', function(n, o) {
+                $scope.loginInfo = n;
             });
         })
-        .controller('LoginCtrl', ['login', '$scope',
-            function(login, $scope) {
-                var self = this;
-                //self.login = login.login.bind(login);
-                self.login = function(user) {login.login(user);};
-                login.onchange(function(data){
-                    self.loginInfo = data.data;
-                });
-            }
-        ]);
+        .controller('LoginCtrl', function($scope, login) {
+            $scope.login = login;
+            var self = this;
+            //self.login = login.login.bind(login);
+            self.login = function(user) {
+                login.login(user);
+            };
+            $scope.$watch('login.getInfo()', function(n, o) {
+                self.loginInfo = n;
+            });
+        });
 })();
