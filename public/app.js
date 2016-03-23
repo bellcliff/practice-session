@@ -15,12 +15,13 @@
                             self.user = data.data;
                         else self.msg = data.data.msg;
                     });
-                }
+                };
                 self.logout = function() {
                     $http.delete('/api/login').success(function(){
-                        self.user = undefined
-                    })
-                }
+                        self.user = undefined;
+                    });
+                };
             }
         ]);
 })();
+
