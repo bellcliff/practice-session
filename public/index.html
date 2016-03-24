@@ -8,17 +8,10 @@
     <script src="libs/angular/angular.js"></script>
 </head>
 
-<body ng-app="app" ng-controller="LoginCtrl as login">
-    <form ng-show="!login.user" onsubmit="return false;">
-        <label>UserName:</label>
-        <input ng-model="nu.username">
-        <label>Password:</label>
-        <input ng-model="nu.password">
-        <button ng-click="login.login(nu)">Login</button>
-        <div class="errmsg" ng-hide="!login.msg">{{login.msg}}</div>
-    </form>
-    <div ng-show="!!login.user">Welcom, {{login.user.username}},
-        <a class="btn btn-danger" ng-click="login.logout()">Logout</a>
+<body ng-app="app" ng-controller="LoginCtrl">
+    <login-form ng-show="!loginInfo.username" info2="loginInfo" login2="onLogin(info)"></login-form>
+    <div ng-show="!!loginInfo.username">Welcom, {{loginInfo.username}},
+        <a class="btn btn-danger" ng-click="logout()">Logout</a>
     </div>
     <script src="app.js"></script>
 </body>

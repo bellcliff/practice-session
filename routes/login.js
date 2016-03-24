@@ -3,10 +3,10 @@ var db = require('mongodb').MongoClient.connect('mongodb://localhost/test');
 var Q = require('q');
 
 router.get('/', function(req, res, next) {
-    var info = {}
+    var info = {};
     if (req.session && !!req.session.user && !!req.session.user.username) 
         info.username = req.session.user.username;
-    res.json(info)
+    res.json(info);
 });
 
 router.post('/', function(req, res, next) {
@@ -15,12 +15,12 @@ router.post('/', function(req, res, next) {
     if (!user || !user.username || !user.password) {
         res.json({
             msg: 'username or password is needed'
-        })
+        });
         return;
     }
     db.then(function(db) {
         // check user exists and valid
-        return db.collection('users').find(user).toArray()
+        return db.collection('users').find(user).toArray();
     }).then(function(users) {
         if (!users || users.length == 0) {
             return {
